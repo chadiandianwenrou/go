@@ -210,6 +210,7 @@ type Formatter interface {
 // Format implement Formatter interface
 // map[string]interface{} => struct{}
 // eg: Format(map[string]interface{...}, &Struct{})
+//传进来数据之后 转化成json,然后把json数据绑定到结构体上,这样就实例化结构体了
 func Format(in, out interface{}) error {
 	b, err := json.Marshal(in)
 	if err != nil {
