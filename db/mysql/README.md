@@ -1,6 +1,6 @@
 mysql的简单使用
 
-
+```
 //只执行sql
 
 //更新
@@ -51,4 +51,4 @@ if err := global.Mysql.Get(context.Background(), global.SQLFormat(cmdPage), func
     log.Error("%#v",err)
   }
 
-
+```
