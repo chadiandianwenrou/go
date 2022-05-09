@@ -28,15 +28,18 @@ _,err = global.Mysql.Exec(context.Background(), prometheusRulesDatacenterService
 
 
 //查询结果进切片
-if err := global.Mysql.Get(context.Background(), global.SQLFormat(cmdPage), func(row map[string]interface{})error{  
-    jsonString, _ := json.Marshal(row)
-    s := RuleDB{}
-    json.Unmarshal(jsonString, &s)
-    doc = append(doc,s)
-    return nil
-  }); err != nil{
-    log.Error("%#v",err)
-  }
+func GetCommunityList() (communityList []*rsp.Community, err error) {
+	sqlStr := `select community_id,community_name from community`
+	if err := global.Mysql.Get(context.Background(), global.SQLFormat(sqlStr), func(row map[string]interface{}) error {
+		jsonString, _ := json.Marshal(row)
+		s := rsp.Community{}
+		json.Unmarshal(jsonString, &s)
+		communityList = append(communityList, s)
+		return nil
+	}); err != nil {
+		return nil, err
+	}
+}
 
   //查询count
   var count int32
