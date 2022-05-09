@@ -34,11 +34,12 @@ func GetCommunityList() (communityList []*rsp.Community, err error) {
 		jsonString, _ := json.Marshal(row)
 		s := rsp.Community{}
 		json.Unmarshal(jsonString, &s)
-		communityList = append(communityList, s)
+		communityList = append(communityList, &s)
 		return nil
 	}); err != nil {
 		return nil, err
 	}
+	return
 }
 
   //查询count
